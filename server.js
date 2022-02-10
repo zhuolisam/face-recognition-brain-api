@@ -17,11 +17,16 @@ const db = knex({
   }
 });
 
+
+const corsOption = {
+  origin:'*', 
+  credentials:true,
+  optionSuccessStatus:200,
+}
+
 const app = express();
 
-app.use(cors({
-  origin: 'https://smart-brain-face-recognition-v.herokuapp.com'
-}))
+app.use(cors(corsOption));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json()); // latest version of exressJS now comes with Body-Parser!
 
