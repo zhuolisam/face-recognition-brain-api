@@ -8,11 +8,12 @@ const db = knex({
   // Enter your own database information here based on what you created
   client: 'pg',
   connection: {
-    host : '127.0.0.1',
-    port: '5432',
-    user : 'postgres',
-    password : 'system',
-    database : 'smart-brain'
+    connectionString : process.env.DATABASE_URL,
+    ssl:true
+    // port: '5432',
+    // user : 'postgres',
+    // password : 'system',
+    // database : 'smart-brain'
   }
 });
 
@@ -23,7 +24,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json()); // latest version of exressJS now comes with Body-Parser!
 
 app.get('/', (req, res)=> {
-  res.send(db.users);
+  res.send('it is working!');
 })
 
 app.post('/signin', (req, res) => {
@@ -104,6 +105,6 @@ app.put('/image', (req, res) => {
     res.status(400).json('unable to get entries')})
 })
 
-app.listen(3000, ()=> {
-  console.log('app is running on port 3000');
+app.listen(process.env.PORT || 3000, ()=> {
+  console.log(`app is running on port ${process.env.PORT}`);
 })
