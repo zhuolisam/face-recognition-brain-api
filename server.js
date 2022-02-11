@@ -9,7 +9,7 @@ const db = knex({
   client: 'pg',
   connection: {
     connectionString : process.env.DATABASE_URL,
-    ssl:true
+    ssl: { rejectUnauthorized: false }
     // port: '5432',
     // user : 'postgres',
     // password : 'system',
@@ -38,6 +38,8 @@ app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
+
+console.log("Database_URL:", process.env.DATABASE_URL);
 
 app.get('/', (req, res)=> {
   res.send('it is working!');
