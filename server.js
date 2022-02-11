@@ -19,9 +19,10 @@ const db = knex({
 
 const corsOption = {
   origin:'https://smart-brain-face-recognition-v.herokuapp.com', 
-  credentials:true,
+  credentials:false,
   methods: ['GET','POST','OPTIONS','PUT'],
   allowedHeaders : ['Content-Type','Origin','X-Requested-With','Accept'],
+  preflightContinue: true,
   optionSuccessStatus:200,
 }
 
@@ -63,7 +64,7 @@ app.post('/signin', (req, res) => {
     .catch(err => res.status(400).json('wrong credentials'))
 })
 
-app.post('/register', cors(), (req, res) => {
+app.post('/register', (req, res) => {
   const { email, name, password } = req.body;
   const hash = bcrypt.hashSync(password);
     db.transaction(trx => {
