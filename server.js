@@ -2,7 +2,8 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const cors = require('cors');
 const knex = require('knex');
-const imagedetect = require('./image')
+const imagedetect = require('./image');
+const { get } = require('express/lib/response');
 
 const db = knex({
   // Enter your own database information here based on what you created
@@ -17,17 +18,18 @@ const db = knex({
   }
 });
 
-
 const corsOption = {
-  origin:'*', 
+  origin:'https://smart-brain-face-recognition-v.herokuapp.com/', 
   credentials:true,
+  methods: ['GET','POST','OPTION','PUT'],
+  allowedHeaders : ['Content-Type'],
   optionSuccessStatus:200,
 }
 
 const app = express();
 
 app.use(cors(corsOption));
-app.use(express.urlencoded({extended: true}));
+// app.use(express.urlencoded({extended: true}));
 app.use(express.json()); // latest version of exressJS now comes with Body-Parser!
 
 app.get('/', (req, res)=> {
