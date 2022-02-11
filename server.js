@@ -19,7 +19,7 @@ const db = knex({
 });
 
 const corsOption = {
-  origin:'https://smart-brain-face-recognition-v.herokuapp.com/', 
+  origin:'https://smart-brain-face-recognition-v.herokuapp.com', 
   credentials:true,
   methods: ['GET','POST','OPTION','PUT'],
   allowedHeaders : ['Content-Type'],
