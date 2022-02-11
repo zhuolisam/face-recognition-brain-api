@@ -6,7 +6,6 @@ const imagedetect = require('./image');
 const { get } = require('express/lib/response');
 
 const db = knex({
-  // Enter your own database information here based on what you created
   client: 'pg',
   connection: {
     connectionString : process.env.DATABASE_URL,
@@ -21,8 +20,8 @@ const db = knex({
 const corsOption = {
   origin:'https://smart-brain-face-recognition-v.herokuapp.com', 
   credentials:true,
-  methods: ['GET','POST','OPTION','PUT'],
-  allowedHeaders : ['Content-Type'],
+  methods: ['GET','POST','OPTIONS','PUT'],
+  allowedHeaders : ['Content-Type','Origin','X-Requested-With','Accept'],
   optionSuccessStatus:200,
 }
 
@@ -34,7 +33,7 @@ app.use(express.json()); // latest version of exressJS now comes with Body-Parse
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'https://smart-brain-face-recognition-v.herokuapp.com');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE,OPTION');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
