@@ -64,7 +64,7 @@ app.post('/signin', (req, res) => {
     .catch(err => res.status(400).json('wrong credentials'))
 })
 
-app.post('/register', (req, res) => {
+app.post('/register', cors(), (req, res) => {
   const { email, name, password } = req.body;
   const hash = bcrypt.hashSync(password);
     db.transaction(trx => {
