@@ -20,7 +20,7 @@ const db = knex({
 const corsOption = {
   origin:'https://smart-brain-face-recognition-v.herokuapp.com', 
   credentials:false,
-  methods: ['GET','POST','OPTIONS','PUT'],
+  methods: ['GET','POST','OPTIONS','PUT','DELETE'],
   allowedHeaders : ['Content-Type','Origin','X-Requested-With','Accept'],
   preflightContinue: true,
   optionSuccessStatus:200,
@@ -29,15 +29,15 @@ const corsOption = {
 const app = express();
 
 app.use(cors(corsOption));
-// app.use(express.urlencoded({extended: true}));
+app.options('*', cors())
 app.use(express.json()); // latest version of exressJS now comes with Body-Parser!
-app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://smart-brain-face-recognition-v.herokuapp.com');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE,OPTION');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-});
+// app.use(function(req, res, next) {
+//   res.setHeader('Access-Control-Allow-Origin', 'https://smart-brain-face-recognition-v.herokuapp.com');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE,OPTION');
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   res.setHeader('Access-Control-Allow-Credentials', true);
+//   next();
+// });
 
 app.get('/', (req, res)=> {
   res.send('it is working!');
