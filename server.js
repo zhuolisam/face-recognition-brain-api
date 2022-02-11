@@ -28,18 +28,8 @@ const corsOption = {
 
 const app = express();
 
-// app.use(cors(corsOption));
-// app.options('*', cors())
+app.use(cors(corsOption));
 app.use(express.json()); // latest version of exressJS now comes with Body-Parser!
-app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://smart-brain-face-recognition-v.herokuapp.com');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE,OPTION');
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-});
-
-console.log("Database_URL:", process.env.DATABASE_URL);
 
 app.get('/', (req, res)=> {
   res.send('it is working!');
