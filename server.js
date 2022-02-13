@@ -10,10 +10,6 @@ const db = knex({
   connection: {
     connectionString : process.env.DATABASE_URL,
     ssl: { rejectUnauthorized: false }
-    // port: '5432',
-    // user : 'postgres',
-    // password : 'system',
-    // database : 'smart-brain'
   }
 });
 
